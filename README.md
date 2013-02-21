@@ -5,6 +5,7 @@ This library adds support for the [Prototype JavaScript framework](http://protot
 ASP.NET MVC AJAX helpers.
 
 To use:
+
 1. Ensure you are using Prototype 1.7 or above
 2. Add prototype.unobtrusive-ajax.js to your JavaScript combiner/minifier
 3. Use the regular [AJAX helper methods](http://msdn.microsoft.com/en-us/library/dd493139.aspx)
