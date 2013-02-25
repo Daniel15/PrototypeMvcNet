@@ -1,14 +1,28 @@
-ASP.NET Unobtrusive AJAX support library for Prototype
-======================================================
+ASP.NET Unobtrusive AJAX support library for Prototype / pure JS
+================================================================
 
 This library adds support for the [Prototype JavaScript framework](http://prototypejs.org/) to the
-ASP.NET MVC AJAX helpers.
+ASP.NET MVC AJAX helpers. A version that uses "pure" JavaScript (no framework) is currently under
+construction.
 
-To use:
+To use the native JS version (not recommended right now), add native.unobtrusive-ajax.js to your
+JavaScript combiner/minifier
+
+To use Prototype version:
+
  - Ensure you are using Prototype 1.7 or above
  - Add prototype.unobtrusive-ajax.js to your JavaScript combiner/minifier
  - Use the regular [AJAX helper methods](http://msdn.microsoft.com/en-us/library/dd493139.aspx)
  
+
+ 
+TODO for "pure" / native JS version
+===================================
+ - Store details of button that was pressed to submit form
+ - Support for old IE (IE 8 and below)
+ - Support for image buttons (is this really needed?)
+ - Serialize <select>s when form is serialized
+
 Licence
 =======
 (The MIT licence)
