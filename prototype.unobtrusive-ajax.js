@@ -76,13 +76,14 @@
                 var result;
                 asyncOnBeforeSend(transport.xhr, method);
                 result = getFunction(element.getAttribute("data-ajax-begin"), ["xhr"]).apply(this, arguments);
-                if (result !== false) {
+                if (result !== false && loading) {
                     loading.show();
                 }
                 return result;
             },
             onComplete: function () {
-                loading.hide();
+                if (loading)
+                    loading.hide();
                 getFunction(element.getAttribute("data-ajax-complete"), ["xhr", "status"]).apply(this, arguments);
             },
             onSuccess: function (response) {
