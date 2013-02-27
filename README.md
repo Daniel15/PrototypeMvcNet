@@ -21,7 +21,6 @@ TODO for "pure" / native JS version
  - Store details of button that was pressed to submit form
  - Support for old IE (IE 8 and below)
  - Support for image buttons (is this really needed?)
- - Serialize <select>s when form is serialized
 
 Licence
 =======

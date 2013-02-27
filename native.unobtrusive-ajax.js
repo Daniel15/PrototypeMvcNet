@@ -1,9 +1,10 @@
 ﻿/*!
 ** Unobtrusive Ajax support library with no JavaScript framework dependencies (eg. jQuery)
-** By Daniel Lo Nigro
+** By Daniel Lo Nigro (Daniel15)
+** http://github.com/Daniel15/PrototypeMvcNet
 */
 
-(function () {
+;(function () {
     function $(id) {
         if (!id)
             return null;
@@ -30,6 +31,11 @@
         }
         return destination;
     }
+    
+    // Convert an "array-like" object to an array
+    function toArray(arrayLike) {
+        return Array.prototype.slice.call(arrayLike);
+    }
 
     function getFunction(code, argNames) {
         var fn = window, parts = (code || "").split(".");
@@ -48,16 +54,20 @@
     }
     
     function serializeForm(formEl) {
-        // TODO: Add <select>s to this
-        var inputEls = formEl.getElementsByTagName("input"),
+        var inputEls = toArray(formEl.getElementsByTagName("input")).concat(toArray(formEl.getElementsByTagName("select"))),
             data = [],
             inputEl;
             
         for (var i = 0, count = inputEls.length; i < count; i++) {
             inputEl = inputEls[i];
+            
+            // Skip any fields with no name
             if (!inputEl.name)
                 continue;
                 
+            // Skip unchecked checkboxes / radio buttons
+            if ((inputEl.type === "checkbox" || inputEl.type === "radio") && !inputEl.checked)
+                continue;
 
             data.push({ name: inputEl.name, value: inputEl.value });
         }
@@ -67,7 +77,7 @@
     
     function serializeData(data) {
         var result = [],
-        	data = data || [];
+            data = data || [];
 
         for (var i = 0, count = data.length; i < count; i++)
         {
@@ -202,7 +212,7 @@
     // TODO: Use an addEventListener/attachEvent wrapper function for old IE compat
     // Delegate all clicks
     document.body.addEventListener("click", function (evt) {
-    	// Ensure the click was on an AJAX link
+        // Ensure the click was on an AJAX link
         if (evt.target.nodeName.toUpperCase() === "A" && evt.target.getAttribute("data-ajax") === "true") {
             evt.preventDefault();
             asyncRequest(evt.target, {
@@ -215,7 +225,7 @@
     
     // Delegate all submit events
     document.body.addEventListener("submit", function (evt) {
-    	// Ensure an AJAX form was submitted
+        // Ensure an AJAX form was submitted
         if (evt.target.nodeName.toUpperCase() !== "FORM" || evt.target.getAttribute("data-ajax") !== "true") {
             return;
         }
